@@ -1,6 +1,6 @@
-package com.example.contacts.db;
+package com.example.contacts.repository;
 
-import com.example.contacts.model.ContactDetails;
+import com.example.contacts.model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -21,13 +21,13 @@ public class ContactsDB {
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;
 
-  public List<ContactDetails> getContacts(Integer userId) {
+  public List<Contact> getContacts(Integer userId) {
     Map<String, Object> params = new HashMap<>();
     params.put("user_id", userId);
     return jdbcTemplate.query(CONTACT_SELECT, params, ContactDetailsRowMapper);
   }
 
-  public ContactDetails addContact(ContactDetails contact) {
+  public Contact addContact(Contact contact) {
     BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(contact);
     KeyHolder keyHolder = new GeneratedKeyHolder();
     jdbcTemplate.update(CONTACT_INSERT, paramSource, keyHolder, new String[] { "id" });
@@ -35,7 +35,7 @@ public class ContactsDB {
     return contact;
   }
 
-  public void updateContact(ContactDetails contact) {
+  public void updateContact(Contact contact) {
     BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(contact);
     jdbcTemplate.update(CONTACT_UPDATE, paramSource);
   }

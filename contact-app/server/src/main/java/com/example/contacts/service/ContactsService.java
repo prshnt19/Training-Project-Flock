@@ -1,9 +1,10 @@
 package com.example.contacts.service;
 
-import com.example.contacts.db.AuthDB;
-import com.example.contacts.db.ContactsDB;
-import com.example.contacts.model.ContactDetails;
+import com.example.contacts.model.Contact;
 import com.example.contacts.model.SessionData;
+import com.example.contacts.repository.AuthDB;
+import com.example.contacts.repository.ContactsDB;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,12 +20,12 @@ public class ContactsService {
   ContactsDB contactsDB;
 
 
-  public List<ContactDetails> getContacts(String sessionToken) {
+  public List<Contact> getContacts(String sessionToken) {
     SessionData s = authDB.checkAuth(sessionToken);
     return contactsDB.getContacts(s.getUserId());
   }
 
-  public ContactDetails addContact(String sessionToken, ContactDetails contact) {
+  public Contact addContact(String sessionToken, Contact contact) {
     SessionData s = authDB.checkAuth(sessionToken);
     contact.setUserId(s.getUserId());
     return contactsDB.addContact(contact);
@@ -35,7 +36,7 @@ public class ContactsService {
     contactsDB.deleteContact(s.getUserId(), contactId);
   }
 
-  public void updateContact( String sessionToken, ContactDetails contact) {
+  public void updateContact( String sessionToken, Contact contact) {
     SessionData s = authDB.checkAuth(sessionToken);
     contact.setUserId(s.getUserId());
     contactsDB.updateContact(contact);

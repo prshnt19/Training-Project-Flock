@@ -13,8 +13,8 @@ public class ObjectRowMapper {
     return user;
   };
 
-  public static RowMapper<ContactDetails> ContactDetailsRowMapper = (rs, rowNum) -> {
-    ContactDetails contact = new ContactDetails();
+  public static RowMapper<Contact> ContactDetailsRowMapper = (rs, rowNum) -> {
+    Contact contact = new Contact();
     contact.setId(rs.getInt("id"));
     contact.setUserId(rs.getInt("user_id"));
     contact.setName(rs.getString("name"));

@@ -1,4 +1,4 @@
-package com.example.contacts.db;
+package com.example.contacts.repository;
 
 import com.example.contacts.model.SessionData;
 import com.example.contacts.model.Sessions;
@@ -34,7 +34,7 @@ public class AuthDB {
     Timestamp current_time = Timestamp.from(Instant.now());
     Map<String, Object> sourceParams = new HashMap<>();
     sourceParams.put("session_token", Authorization);
-    User user = new User();
+    User user;
     Sessions session;
     SessionData sessionData = new SessionData();
     try {
@@ -64,10 +64,7 @@ public class AuthDB {
     BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(user);
     int count = jdbcTemplate.update(USER_REGISTER, paramSource);
 
-    if (count == 0) {
-      return false;
-    }
-    return true;
+    return count != 0;
   }
 
 

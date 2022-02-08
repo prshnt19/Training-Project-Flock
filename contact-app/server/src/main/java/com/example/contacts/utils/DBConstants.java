@@ -23,8 +23,6 @@ public interface DBConstants {
   }
 
   interface ContactsQueries {
-
-
     String SESSION_INSERT = "INSERT INTO sessions(session_token, user_id, expiry_time) VALUES(:session_token, :user_id, :expiry_time)";
     String USER_SELECT = "SELECT * FROM users WHERE email=:email AND password=:password LIMIT 1";
     String USER_SELECT_WHERE_ID = "SELECT * FROM users WHERE id=:id LIMIT 1";

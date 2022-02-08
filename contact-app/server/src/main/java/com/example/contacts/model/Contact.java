@@ -5,18 +5,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Timestamp;
 
 @Entity
-@Table(name = "sessions")
+@Table(name = "contacts")
 @Getter
 @Setter
-public class Sessions {
-  @SerializedName("session_token")
-  private String sessionToken;
+public class Contact {
+  @Id
+  private Integer id;
   @SerializedName("user_id")
   private Integer userId;
-  @SerializedName("expiry_time")
-  private Timestamp expiryTime;
+  private String name;
+  private String contact;
+  private String email;
+  private String address;
+  private Integer score;
 }
