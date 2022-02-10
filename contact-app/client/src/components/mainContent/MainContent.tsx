@@ -4,19 +4,15 @@ import { ShowContact } from "../showContact/ShowContact";
 import { EditContact } from "../editContact/EditContact";
 import { Sidebar } from "../sidebar/Sidebar";
 import { Navbar } from "../navbar/Navbar";
-import { useSelector, useDispatch } from "react-redux";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import LogoutIcon from "@mui/icons-material/Logout";
-import "./MainContent.css";
-
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { setContacts } from "../../redux/contacts";
-import { ApiManager } from "../../api/APIManager";
 import { useNavigate } from "react-router-dom";
 import { ContactService } from "../../service/ContactService";
 import { AuthService } from "../../service/AuthService";
+import Contact from "../../model/Contact";
+import "./MainContent.css";
 
-const emptyContact = {
+const emptyContact: Contact = {
   id: 0,
   name: "",
   contact: "",
@@ -26,17 +22,9 @@ const emptyContact = {
 };
 
 const MainContent = () => {
-  const value = useSelector((state) => state.menu.value);
-  const Menu = () => {
-    if (value === "AddContact") return <AddContact />;
-    if (value === "ShowContact") return <ShowContact />;
-    if (value === "EditContact") return <EditContact />;
-    return <></>;
-  };
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
     AuthService.checkAuth().then((res) => {
       if (res) {
@@ -48,6 +36,14 @@ const MainContent = () => {
       }
     });
   }, []);
+
+  const value = useAppSelector((state) => state.menu.value);
+  const Menu = () => {
+    if (value === "AddContact") return <AddContact />;
+    if (value === "ShowContact") return <ShowContact />;
+    if (value === "EditContact") return <EditContact />;
+    return <></>;
+  };
 
   return (
     <>

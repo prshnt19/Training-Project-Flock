@@ -1,20 +1,23 @@
 import { Avatar, IconButton } from "@mui/material";
 import React from "react";
-
-import { ApiManager } from "../../api/APIManager";
 import ModeEditRoundedIcon from "@mui/icons-material/ModeEditRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { setMenu } from "../../redux/menu";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch } from "../../redux/hooks";
 
 import "./Contact.css";
 import { setSelectedContact } from "../../redux/selectedContact";
 import { emptyContact } from "../mainContent/MainContent";
 import { updateContact, deleteStoreContact } from "../../redux/contacts";
 import { ContactService } from "../../service/ContactService";
+import Contact from "../../model/Contact";
 
-const Contact = (props) => {
-  const dispatch = useDispatch();
+interface ContactProps {
+  contact: Contact;
+}
+
+const ContactTile: React.FC<ContactProps> = (props) => {
+  const dispatch = useAppDispatch();
 
   const showContact = () => {
     const score = "score";
@@ -38,7 +41,6 @@ const Contact = (props) => {
       dispatch(setMenu(""));
       dispatch(setSelectedContact(emptyContact));
     }
-    // TODO: Remove contact from the redux store allContacts
   };
 
   return (
@@ -75,15 +77,15 @@ const Contact = (props) => {
   );
 };
 
-export { Contact };
+export { ContactTile };
 
-function stringToColor(string) {
+function stringToColor(str: string) {
   let hash = 0;
   let i;
 
   /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  for (i = 0; i < str.length; i += 1) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
   }
 
   let color = "#";
@@ -96,11 +98,11 @@ function stringToColor(string) {
 
   return color;
 }
-function stringAvatar(name) {
+function stringAvatar(name: string) {
   return {
     sx: {
       bgcolor: stringToColor(name),
     },
-    children: `${name.split(" ")[0][0]}`, // TODO: This will only print one letter. What is empty name?
+    children: `${name.split(" ")[0][0]}`, // TODO: This will only print one letter. What if empty name?
   };
 }

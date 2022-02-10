@@ -1,38 +1,46 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { setSelectedContact } from "../../redux/selectedContact";
 
 import "./BaseContact.css";
 import { grey } from "@mui/material/colors";
+import Contact from "../../model/Contact";
 
-const BaseContact = (props) => {
-  const dispatch = useDispatch();
-  const contact = useSelector((state) => state.selectedContact.selectedContact);
+interface BaseContactProps {
+  heading_text: string;
+  button_text: string;
+  rootStyle: string;
+  ContactHandler: (contact: Contact) => void;
+}
 
-  const validateEmail = (email) => {
-    return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-  };
+const BaseContact = (props: BaseContactProps) => {
+  const dispatch = useAppDispatch();
+  const contact = useAppSelector((state) => state.selectedContact.value);
 
-  const validateName = (name) => {
-    return name.match(
-      /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
-    );
-  };
+  // const validateEmail = (email: string) => {
+  //   return email.match(
+  //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  //   );
+  // };
 
-  const validateContactNumber = (contactNumber) => {
-    return contactNumber.match(
-      /^[0-9]{15}$/
-    );
-  };
+  // const validateName = (name: string) => {
+  //   return name.match(
+  //     /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+  //   );
+  // };
 
-  const changeHandler = (prop) => {
-    return (event) => {
+  // const validateContactNumber = (contactNumber: string) => {
+  //   return contactNumber.match(
+  //     /^[0-9]{15}$/
+  //   );
+  // };
+
+  const changeHandler = (prop: string) => {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
       if (props.button_text !== "Edit") {
         dispatch(
           setSelectedContact({ ...contact, [prop]: event.target.value })
@@ -56,7 +64,6 @@ const BaseContact = (props) => {
             fullWidth
             margin="normal"
             // required
-            readOnly={true}
             id="outlined-required"
             label="Name"
             // defaultValue="Name"

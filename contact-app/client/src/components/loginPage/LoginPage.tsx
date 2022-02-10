@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LoginPage.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { AuthService } from "../../service/AuthService";
 
 const LoginPage = function () {
@@ -23,14 +22,14 @@ const LoginPage = function () {
     password: "",
   });
 
-  const validateEmail = (email) => {
+  const validateEmail = (email: string) => {
     return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
   };
 
-  const changeHandler = (prop) => {
-    return (event) => {
+  const changeHandler = (prop: string) => {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
       setLoginInfo({ ...loginInfo, [prop]: event.target.value });
     };
   };
@@ -43,6 +42,7 @@ const LoginPage = function () {
           navigate("/", { replace: true });
         })
         .catch((err) => {
+          alert("Invalid Email or Password");
         });
     } else {
       alert("Please Enter Correct Email");

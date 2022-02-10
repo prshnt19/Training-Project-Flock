@@ -1,17 +1,16 @@
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import React from "react";
 import { ContactList } from "../contactList/ContactList";
 import { setMenu } from "../../redux/menu";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../redux/hooks";
 import { setSearchText } from "../../redux/searchText";
-import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 
 import "./Sidebar.css";
 import { setSelectedContact } from "../../redux/selectedContact";
 import { emptyContact } from "../mainContent/MainContent";
 const Sidebar = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div className="sidebar">

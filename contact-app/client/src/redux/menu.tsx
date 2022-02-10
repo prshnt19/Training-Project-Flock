@@ -1,13 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: "NONE",
+  value: "",
 };
+
 export const menuSlice = createSlice({
   name: "menu",
   initialState,
   reducers: {
-    setMenu: (state, action) => {
+    setMenu: (state, action: PayloadAction<string>) => {
       state.value = action.payload;
     },
   },

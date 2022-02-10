@@ -8,6 +8,7 @@ import {
 } from "../service/constants";
 
 import { APIManager } from "../api/APIManager";
+import User from "../model/User";
 
 export class AuthService {
 
@@ -19,7 +20,7 @@ export class AuthService {
     });
   }
 
-  static registerUser(user) {
+  static registerUser(user: User) {
     return APIManager.request(REGISTER_USER, POST, JSON.stringify(user), false, true).then((res) => {
       const resp = res;
       localStorage.setItem("sessionToken", resp.sessionToken);
@@ -28,7 +29,7 @@ export class AuthService {
     });
   }
 
-  static loginUser(user) {
+  static loginUser(user: User) {
     return APIManager.request(LOGIN_USER, POST, JSON.stringify(user), false, true).then((res) => {
       const resp = res;
       localStorage.setItem("sessionToken", resp.sessionToken);

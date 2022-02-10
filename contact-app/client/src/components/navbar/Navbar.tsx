@@ -29,9 +29,7 @@ const Navbar = () => {
         <div className="navbar-logo">
           <Avatar
             src="https://img.icons8.com/pastel-glyph/64/000000/business-contact.png"
-            style={{ height: "45px", width: "45px" }}
-            // eslint-disable-next-line react/jsx-no-duplicate-props
-            style={{ borderRadius: 0 }}
+            style={{ height: "45px", width: "45px", borderRadius: 0 }}
           />
           <p>Contacts App</p>
         </div>

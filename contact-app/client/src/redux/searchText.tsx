@@ -1,14 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  searchText: "", // TODO: better naming
+  value: "",
 };
+
 export const searchTextSlice = createSlice({
   name: "searchText",
   initialState,
   reducers: {
-    setSearchText: (state, action) => {
-      state.searchText = action.payload;
+    setSearchText: (state, action: PayloadAction<string>) => {
+      state.value = action.payload;
     },
   },
 });

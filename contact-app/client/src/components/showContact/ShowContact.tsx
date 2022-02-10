@@ -4,16 +4,16 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
 import { setMenu } from "../../redux/menu";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { grey } from "@mui/material/colors";
 
 import "./ShowContact.css";
 
-const ShowContact = (props) => {
-  const dispatch = useDispatch();
-  const contact = useSelector((state) => state.selectedContact.selectedContact);
+const ShowContact = () => {
+  const dispatch = useAppDispatch();
+  const contact = useAppSelector((state) => state.selectedContact.value);
 
-  const showContactHandler = (contact) => {
+  const showContactHandler = () => {
     dispatch(setMenu("EditContact"));
   };
   return (

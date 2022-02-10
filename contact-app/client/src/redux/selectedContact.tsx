@@ -1,7 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import Contact from "../model/Contact";
 
-const initialState = {
-  selectedContact: {
+interface SelecctedContactState { 
+  value: Contact;
+}
+
+const initialState: SelecctedContactState = {
+  value: {
     id: 0,
     name: "",
     contact: "",
@@ -10,12 +15,13 @@ const initialState = {
     score: 0,
   }
 };
+
 export const selectedContactSlice = createSlice({
   name: "selectedContact",
   initialState,
   reducers: {
-    setSelectedContact: (state, action) => {
-      state.selectedContact = action.payload;
+    setSelectedContact: (state, action: PayloadAction<Contact>) => {
+      state.value = action.payload;
     },
   },
 });

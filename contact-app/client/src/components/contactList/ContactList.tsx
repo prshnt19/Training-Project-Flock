@@ -1,15 +1,13 @@
 import React from "react";
-import { Contact } from "../contact/Contact";
-import { useSelector, useDispatch } from "react-redux";
+import { ContactTile } from "../contact/ContactTile";
+import { useAppSelector } from "../../redux/hooks";
 
 import "./ContactList.css";
-import { setSelectedContact } from "../../redux/selectedContact";
-import { setMenu } from "../../redux/menu";
-import { emptyContact } from "../mainContent/MainContent";
+import Contact from "../../model/Contact";
 
 const ContactList = () => {
-  const allContacts = useSelector((state) => state.contacts.contacts);
-  let searchText = useSelector((state) => state.searchText.searchText);
+  const allContacts = useAppSelector((state) => state.contacts.value);
+  let searchText = useAppSelector((state) => state.searchText.value);
   let contactsToDisplay = [];
 
   if (searchText !== "") {
@@ -23,14 +21,20 @@ const ContactList = () => {
         contactsToDisplay.push(contact);
       }
     }
-    contactsToDisplay.sort(function (a, b) {
+    contactsToDisplay.sort(function (a: Contact, b: Contact) {
       if (a.score > b.score) {
         return -1;
       }
       if (a.score < b.score) {
         return 1;
       }
-      return a.name.toLowerCase() < b.name.toLowerCase();
+      if (a.name.toLowerCase() < b.name.toLowerCase()) {
+        return -1;
+      }
+      if (a.name.toLowerCase() > b.name.toLowerCase()) {
+        return 1;
+      }
+      return 0;
     });
   } else {
     for (let index = 0; index < allContacts.length; index++) {
@@ -50,7 +54,7 @@ const ContactList = () => {
   return (
     <div className="contact-list">
       {contactsToDisplay.map((contact) => {
-        return <Contact key={contact.id} contact={contact} />; // TODO: alternate shading for contacts
+        return <ContactTile key={contact.id} contact={contact} />; // TODO: alternate shading for contacts
       })}
     </div>
   );

@@ -2,23 +2,25 @@ import React from "react";
 
 import { BaseContact } from "../baseContact/BaseContact";
 import { setMenu } from "../../redux/menu";
-import { useDispatch } from "react-redux";
 import { setSelectedContact } from "../../redux/selectedContact";
 import { emptyContact } from "../mainContent/MainContent";
 import { addContact } from "../../redux/contacts";
 import { ContactService } from "../../service/ContactService";
+import Contact from "../../model/Contact";
+import { useAppDispatch } from "../../redux/hooks";
 
 const AddContact = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const addContactHandler = (contact) => {
+  const addContactHandler = (contact: Contact) => {
     ContactService.addContact(contact).then((res) => {
-      const id = "id";
+      contact.id = res;
       dispatch(setSelectedContact(emptyContact));
-      dispatch(addContact({ ...contact, [id]: res }));
+      dispatch(addContact(contact));
       dispatch(setMenu(""));
     });
   };
+
   return (
     <BaseContact
       heading_text="Add New Contact"
