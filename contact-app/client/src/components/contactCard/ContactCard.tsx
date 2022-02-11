@@ -3,43 +3,45 @@ import React from "react";
 import ModeEditRoundedIcon from "@mui/icons-material/ModeEditRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { setMenu } from "../../redux/menu";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
-import "./Contact.css";
+import "./ContactCard.css";
 import { setSelectedContact } from "../../redux/selectedContact";
 import { emptyContact } from "../mainContent/MainContent";
 import { updateContact, deleteStoreContact } from "../../redux/contacts";
-import { ContactService } from "../../service/ContactService";
 import Contact from "../../model/Contact";
+import { DBService } from "../../db/DBService";
 
 interface ContactProps {
   contact: Contact;
 }
 
-const ContactTile: React.FC<ContactProps> = (props) => {
+const ContactCard: React.FC<ContactProps> = (props) => {
   const dispatch = useAppDispatch();
+  const searchText = useAppSelector((state) => state.searchText.value);
 
-  const showContact = () => {
-    const score = "score";
-    let updatedScoreContact = {
-      ...props.contact,
-      [score]: props.contact.score + 1,
-    };
+  const showContact = async () => {
+    let updatedScoreContact = props.contact;
+    if (searchText.length > 0) {
+      updatedScoreContact = {...updatedScoreContact, score: updatedScoreContact.score + 1};
+      DBService.updateContact(updatedScoreContact);
+    }
     dispatch(setSelectedContact(updatedScoreContact));
-    ContactService.updateContact(updatedScoreContact);
     dispatch(updateContact(updatedScoreContact));
     dispatch(setMenu("ShowContact"));
   };
 
-  const deleteContact = () => {
+  const deleteContact = async () => {
     let confirmDelete = window.confirm(
       "Are you sure you want to delete this contact?"
     );
     if (confirmDelete) {
-      ContactService.deleteContact(props.contact.id);
-      dispatch(deleteStoreContact(props.contact.id));
-      dispatch(setMenu(""));
-      dispatch(setSelectedContact(emptyContact));
+      DBService.deleteContact(props.contact.id).then(
+        () => {
+          dispatch(deleteStoreContact(props.contact.id));
+          dispatch(setMenu(""));
+          dispatch(setSelectedContact(emptyContact));
+        });
     }
   };
 
@@ -77,7 +79,7 @@ const ContactTile: React.FC<ContactProps> = (props) => {
   );
 };
 
-export { ContactTile };
+export { ContactCard };
 
 function stringToColor(str: string) {
   let hash = 0;

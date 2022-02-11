@@ -12,7 +12,7 @@ import User from "../model/User";
 
 export class AuthService {
 
-  static checkAuth() {
+  static async checkAuth() {
     return APIManager.request(CHECK_AUTH, GET, null, true, true).then((res) => {
       const resp = res;
       sessionStorage.setItem("name", resp.name);
@@ -20,7 +20,7 @@ export class AuthService {
     });
   }
 
-  static registerUser(user: User) {
+  static async registerUser(user: User) {
     return APIManager.request(REGISTER_USER, POST, JSON.stringify(user), false, true).then((res) => {
       const resp = res;
       localStorage.setItem("sessionToken", resp.sessionToken);
@@ -29,7 +29,7 @@ export class AuthService {
     });
   }
 
-  static loginUser(user: User) {
+  static async loginUser(user: User) {
     return APIManager.request(LOGIN_USER, POST, JSON.stringify(user), false, true).then((res) => {
       const resp = res;
       localStorage.setItem("sessionToken", resp.sessionToken);
@@ -38,7 +38,7 @@ export class AuthService {
     });
   }
 
-  static logoutUser() {
+  static async logoutUser() {
     return APIManager.request(LOGOUT_USER, GET, null, true, false, false).then(() => {
       localStorage.removeItem("sessionToken");
       let sessionStorage = window.sessionStorage;

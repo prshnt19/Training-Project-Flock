@@ -7,13 +7,16 @@ import { Navbar } from "../navbar/Navbar";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { setContacts } from "../../redux/contacts";
 import { useNavigate } from "react-router-dom";
-import { ContactService } from "../../service/ContactService";
+// import { ContactService } from "../../service/ContactService";
 import { AuthService } from "../../service/AuthService";
 import Contact from "../../model/Contact";
 import "./MainContent.css";
+// import { db } from "../../db/db";
+import { DBService } from "../../db/DBService";
 
 const emptyContact: Contact = {
   id: 0,
+  userId: 0,
   name: "",
   contact: "",
   email: "",
@@ -26,15 +29,16 @@ const MainContent = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    AuthService.checkAuth().then((res) => {
-      if (res) {
-        ContactService.getContacts().then((res) => {
-          dispatch(setContacts(res));
-        });
-      } else {
-        navigate("/login", { replace: true });
-      }
-    });
+    AuthService.checkAuth()
+      .then((userId) => {
+        if (userId) {
+          DBService.getContacts(userId).then((contacts) => {
+            dispatch(setContacts(contacts));
+          });
+        } else {
+          navigate("/login", { replace: true });
+        }
+      });
   }, []);
 
   const value = useAppSelector((state) => state.menu.value);

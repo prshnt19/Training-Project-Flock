@@ -8,6 +8,7 @@ interface SelecctedContactState {
 const initialState: SelecctedContactState = {
   value: {
     id: 0,
+    userId: 0,
     name: "",
     contact: "",
     email: "",

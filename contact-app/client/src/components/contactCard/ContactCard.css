@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-evenly;
   border-bottom: 1px solid grey;
-  /* border-bottom-width: 10px; */
   background-color: #fff;
 }
 

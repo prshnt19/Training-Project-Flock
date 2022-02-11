@@ -13,9 +13,11 @@ const ShowContact = () => {
   const dispatch = useAppDispatch();
   const contact = useAppSelector((state) => state.selectedContact.value);
 
-  const showContactHandler = () => {
+  const showContactHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     dispatch(setMenu("EditContact"));
   };
+
   return (
     <Box className="contact-wrapper-show" border={1} borderColor={grey[400]}>
       <Typography variant="h4" color="#575757">

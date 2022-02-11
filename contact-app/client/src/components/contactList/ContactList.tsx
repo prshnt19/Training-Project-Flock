@@ -1,5 +1,5 @@
 import React from "react";
-import { ContactTile } from "../contact/ContactTile";
+import { ContactCard } from "../contactCard/ContactCard";
 import { useAppSelector } from "../../redux/hooks";
 
 import "./ContactList.css";
@@ -54,7 +54,7 @@ const ContactList = () => {
   return (
     <div className="contact-list">
       {contactsToDisplay.map((contact) => {
-        return <ContactTile key={contact.id} contact={contact} />; // TODO: alternate shading for contacts
+        return <ContactCard key={contact.id} contact={contact} />; // TODO: alternate shading for contacts
       })}
     </div>
   );

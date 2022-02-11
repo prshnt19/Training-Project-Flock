@@ -58,22 +58,19 @@ const BaseContact = (props: BaseContactProps) => {
       <Typography variant="h4" color="#575757">
         {props.heading_text}
       </Typography>
-      <form onSubmit={ContactHandler}>
+      <form>
         <Box className="contactinfo">
           <TextField
             fullWidth
             margin="normal"
-            // required
             id="outlined-required"
             label="Name"
-            // defaultValue="Name"
             value={contact.name}
             onChange={changeHandler("name")}
           />
           <TextField
             fullWidth
             margin="normal"
-            // required
             id="outlined-required"
             label="Contact Number"
             value={contact.contact}
@@ -82,29 +79,25 @@ const BaseContact = (props: BaseContactProps) => {
           <TextField
             fullWidth
             margin="normal"
-            // required
             id="outlined-required"
             label="Email Id"
             value={contact.email}
-            // defaultValue="Email Id"
             onChange={changeHandler("email")}
           />
           <TextField
             fullWidth
             margin="normal"
-            // required
             id="outlined-multiline-flexible"
             label="Address"
             value={contact.address}
             multiline
             minRows={2}
-            maxRows={2}
+            maxRows={3}
             onChange={changeHandler("address")}
-            // defaultValue="Address"
           />
         </Box>
         <Box className="contact-add">
-          <Button id="base-contact-button" type="submit" variant="contained">
+          <Button id="base-contact-button" type="button" variant="contained" onClick={ContactHandler}>
             {props.button_text}
           </Button>
         </Box>
