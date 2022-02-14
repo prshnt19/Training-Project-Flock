@@ -1,12 +1,10 @@
 /* .authpage-wrapper {
   display: flex; */
-
 /* background-color: rgb(244, 245, 245); */
 /* justify-content: center; */
 /* width: 100%; */
 /* align-items: center; */
 /* height: 100vh; */
-
 /* } */
 
 .loginpage-wrapper {
@@ -53,7 +51,6 @@
   margin-top: 10px;
   width: 40%;
   align-self: center;
-
   /* outline: none;
   border: none; */
   cursor: pointer;
@@ -62,6 +59,7 @@
 .loginpage-footer {
   margin-top: 80px;
 }
+
 .register-heading {
   margin-bottom: 50px;
 }

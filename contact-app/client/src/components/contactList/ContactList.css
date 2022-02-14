@@ -7,10 +7,12 @@
   overflow-y: scroll;
   /* scrollbar-color: grey; */
 }
+
 ::-webkit-scrollbar,
 ::-webkit-scrollbar-track {
   opacity: 0;
 }
+
 ::-webkit-scrollbar,
 ::-webkit-scrollbar-track {
   background: #fff;
