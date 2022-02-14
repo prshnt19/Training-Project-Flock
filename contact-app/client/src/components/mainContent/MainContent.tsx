@@ -20,7 +20,6 @@ const MainContent = () => {
   const fetchContacts = async () => {
     console.log("fetching contacts");
     const contacts = await ContactService.getContacts();
-    DBService.putContacts(contacts);
     dispatch(setContacts(contacts)); // TODO: Use Delta Sync
   };
 
@@ -38,7 +37,7 @@ const MainContent = () => {
       });
 
     fetchContacts();
-    const interval = setInterval(fetchContacts, 60000);
+    const interval = setInterval(fetchContacts, 600000);
 
     return () => {
       console.log("clearing interval");

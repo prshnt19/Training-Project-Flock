@@ -4,17 +4,13 @@ import { setMenu } from "../../redux/menu";
 import { useAppDispatch } from "../../redux/hooks";
 import { updateContact } from "../../redux/contacts";
 import Contact from "../../model/Contact";
-import { DBService } from "../../db/DBService";
 
 const EditContact = () => {
   const dispatch = useAppDispatch();
 
-  const editContactHandler = async (contact: Contact) => {
-    DBService.updateContact(contact)
-      .then(() => {
-        dispatch(updateContact(contact));
-        dispatch(setMenu("ShowContact"));
-      });
+  const editContactHandler = (contact: Contact) => {
+    dispatch(updateContact(contact));
+    dispatch(setMenu("ShowContact"));
   };
 
   return (

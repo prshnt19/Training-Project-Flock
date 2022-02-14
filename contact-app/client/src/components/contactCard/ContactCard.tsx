@@ -6,9 +6,8 @@ import { setMenu } from "../../redux/menu";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setSelectedContact } from "../../redux/selectedContact";
 import { emptyContact } from "../../utils/Utils";
-import { updateContact, deleteStoreContact } from "../../redux/contacts";
+import { updateContact, deleteContact } from "../../redux/contacts";
 import Contact from "../../model/Contact";
-import { DBService } from "../../db/DBService";
 import { stringAvatar } from "../../utils/Utils";
 import "./ContactCard.css";
 
@@ -20,37 +19,34 @@ export const ContactCard: React.FC<ContactProps> = (props) => {
   const dispatch = useAppDispatch();
   const searchText = useAppSelector((state) => state.searchText.value);
 
-  const showContact = async () => {
+  const showContactHandler = async () => {
     let updatedScoreContact = props.contact;
     if (searchText.length > 0) {
-      updatedScoreContact = {...updatedScoreContact, score: updatedScoreContact.score + 1};
-      DBService.updateContact(updatedScoreContact);
+      updatedScoreContact = { ...updatedScoreContact, score: updatedScoreContact.score + 1 };
+      dispatch(updateContact(updatedScoreContact));
     }
     dispatch(setSelectedContact(updatedScoreContact));
-    dispatch(updateContact(updatedScoreContact));
     dispatch(setMenu("ShowContact"));
   };
+  // TODO: Better move function to ContactList
 
-  const deleteContact = async () => {
+  const deleteContactHandler = async () => {
     let confirmDelete = window.confirm(
       "Are you sure you want to delete this contact?"
     );
     if (confirmDelete) {
-      DBService.deleteContact(props.contact.id).then(
-        () => {
-          dispatch(deleteStoreContact(props.contact.id));
-          dispatch(setMenu(""));
-          dispatch(setSelectedContact(emptyContact));
-        });
+      dispatch(deleteContact(props.contact.id));
+      dispatch(setMenu(""));
+      dispatch(setSelectedContact(emptyContact));
     }
   };
 
   return (
     <div className="contact-box">
-      <div className="contact-avatar" onClick={showContact}>
+      <div className="contact-avatar" onClick={showContactHandler}>
         <Avatar {...stringAvatar(props.contact.name)} />
       </div>
-      <div className="contact-text" onClick={showContact}>
+      <div className="contact-text" onClick={showContactHandler}>
         <div className="contact-name">{props.contact.name}</div>
         <div className="contact-number">{props.contact.contact}</div>
       </div>
@@ -69,7 +65,7 @@ export const ContactCard: React.FC<ContactProps> = (props) => {
       <div className="contact-delete">
         <IconButton
           title="Delete Contact"
-          onClick={deleteContact}
+          onClick={deleteContactHandler}
           style={{ height: "40px", width: "40px", borderRadius: "100%", color: "red" }}
         >
           <DeleteIcon />

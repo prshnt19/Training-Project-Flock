@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Contact from "../model/Contact";
+import { DBService } from "../db/DBService";
 
 interface ContactsState {
   value: Contact[];
@@ -19,15 +20,17 @@ export const contactsSlice = createSlice({
     addContact: (state, action: PayloadAction<Contact>) => {
       state.value.push(action.payload);
     },
-    deleteStoreContact: (state, action: PayloadAction<number>) => {
+    deleteContact: (state, action: PayloadAction<number>) => {
       state.value = state.value.filter((contact) => contact.id !== action.payload);
+      DBService.deleteContact(action.payload);
     },
     updateContact: (state, action: PayloadAction<Contact>) => {
       state.value = state.value.filter((contact) => contact.id !== action.payload.id);
       state.value.push(action.payload);
+      DBService.updateContact(action.payload);
     },
   },
 });
 
-export const { setContacts, addContact, deleteStoreContact, updateContact } = contactsSlice.actions;
+export const { setContacts, addContact, deleteContact, updateContact } = contactsSlice.actions;
 export default contactsSlice.reducer;
