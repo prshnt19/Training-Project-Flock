@@ -4,7 +4,7 @@ import { ExitToAppRounded } from "@material-ui/icons";
 import { AuthService } from "../../service/AuthService";
 import { useNavigate } from "react-router-dom";
 import { stringToColor } from "../../utils/Utils";
-import "./Navbar.css";
+import "./style.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -50,4 +50,4 @@ const Navbar = () => {
   );
 };
 
-export { Navbar };
+export default Navbar;

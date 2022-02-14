@@ -1,8 +1,8 @@
 import React from "react";
-import { ContactCard } from "../contactCard/ContactCard";
+import ContactCard from "../ContactCard";
 import { useAppSelector } from "../../redux/hooks";
 import { contactsToDisplay } from "../../utils/Utils";
-import "./ContactList.css";
+import "./style.css";
 
 const ContactList = () => {
   const allContacts = useAppSelector((state) => state.contacts.value);
@@ -18,4 +18,4 @@ const ContactList = () => {
   );
 };
 
-export { ContactList };
+export default ContactList;

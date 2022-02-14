@@ -7,7 +7,7 @@ import { setSelectedContact } from "../../redux/selectedContact";
 import { grey } from "@mui/material/colors";
 import Contact from "../../model/Contact";
 import { validateContact } from "../../utils/Utils";
-import "./BaseContact.css";
+import "./style.css";
 
 interface BaseContactProps {
   heading_text: string;
@@ -89,4 +89,4 @@ const BaseContact = (props: BaseContactProps) => {
   );
 };
 
-export { BaseContact };
+export default BaseContact;

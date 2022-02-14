@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import { AddContact } from "../addContact/AddContact";
-import { ShowContact } from "../showContact/ShowContact";
-import { EditContact } from "../editContact/EditContact";
-import { Sidebar } from "../sidebar/Sidebar";
-import { Navbar } from "../navbar/Navbar";
+import AddContact from "../AddContact";
+import ShowContact from "../ShowContact";
+import EditContact from "../EditContact";
+import Sidebar from "../Sidebar";
+import Navbar from "../Navbar";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { setContacts } from "../../redux/contacts";
 import { useNavigate } from "react-router-dom";
 import { ContactService } from "../../service/ContactService";
 import { AuthService } from "../../service/AuthService";
 import { DBService } from "../../db/DBService";
-import "./MainContent.css";
+import "./style.css";
 
 const MainContent = () => {
 
@@ -66,4 +66,4 @@ const MainContent = () => {
   );
 };
 
-export { MainContent };
+export default MainContent;

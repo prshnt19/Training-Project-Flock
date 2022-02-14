@@ -1,13 +1,13 @@
-import { IconButton } from "@mui/material";
 import React from "react";
-import { ContactList } from "../contactList/ContactList";
+import { IconButton } from "@mui/material";
+import ContactList from "../ContactList";
 import { setMenu } from "../../redux/menu";
 import { useAppDispatch } from "../../redux/hooks";
 import { setSearchText } from "../../redux/searchText";
 import AddIcon from "@material-ui/icons/Add";
 import { setSelectedContact } from "../../redux/selectedContact";
 import { emptyContact } from "../../utils/Utils";
-import "./Sidebar.css";
+import "./style.css";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -42,4 +42,4 @@ const Sidebar = () => {
   );
 };
 
-export { Sidebar };
+export default Sidebar;

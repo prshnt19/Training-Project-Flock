@@ -5,7 +5,7 @@ import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AuthService } from "../../service/AuthService";
 import { validateEmail } from "../../utils/Utils";
-import "./RegisterPage.css";
+import "./style.css";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -83,4 +83,4 @@ const RegisterPage = () => {
   );
 };
 
-export { RegisterPage };
+export default RegisterPage;

@@ -1,7 +1,7 @@
 import React from "react";
-import { LoginPage } from "./components/loginPage/LoginPage";
-import { MainContent } from "./components/mainContent/MainContent";
-import { RegisterPage } from "./components/registerPage/RegisterPage";
+import LoginPage from "./components/LoginPage";
+import MainContent from "./components/MainContent";
+import RegisterPage from "./components/RegisterPage";
 import {
   BrowserRouter,
   Route,

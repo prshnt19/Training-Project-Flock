@@ -9,13 +9,13 @@ import { emptyContact } from "../../utils/Utils";
 import { updateContact, deleteContact } from "../../redux/contacts";
 import Contact from "../../model/Contact";
 import { stringAvatar } from "../../utils/Utils";
-import "./ContactCard.css";
+import "./style.css";
 
 interface ContactProps {
   contact: Contact;
 }
 
-export const ContactCard: React.FC<ContactProps> = (props) => {
+const ContactCard: React.FC<ContactProps> = (props) => {
   const dispatch = useAppDispatch();
   const searchText = useAppSelector((state) => state.searchText.value);
 
@@ -74,3 +74,5 @@ export const ContactCard: React.FC<ContactProps> = (props) => {
     </div>
   );
 };
+
+export default ContactCard;

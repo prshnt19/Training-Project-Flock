@@ -5,7 +5,7 @@ import { Button, Typography } from "@mui/material";
 import { setMenu } from "../../redux/menu";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { grey } from "@mui/material/colors";
-import "./ShowContact.css";
+import "./style.css";
 
 const ShowContact = () => {
   const dispatch = useAppDispatch();
@@ -68,4 +68,4 @@ const ShowContact = () => {
   );
 };
 
-export { ShowContact };
+export default ShowContact;

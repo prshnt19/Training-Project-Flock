@@ -1,5 +1,5 @@
 import React from "react";
-import { BaseContact } from "../baseContact/BaseContact";
+import BaseContact from "../BaseContact";
 import { setMenu } from "../../redux/menu";
 import { setSelectedContact } from "../../redux/selectedContact";
 import { emptyContact } from "../../utils/Utils";
@@ -31,4 +31,4 @@ const AddContact = () => {
   );
 };
 
-export { AddContact };
+export default AddContact;
