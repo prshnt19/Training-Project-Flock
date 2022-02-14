@@ -1,14 +1,13 @@
 import React from "react";
-
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { setSelectedContact } from "../../redux/selectedContact";
-
-import "./BaseContact.css";
 import { grey } from "@mui/material/colors";
 import Contact from "../../model/Contact";
+import { validateContact } from "../../utils/Utils";
+import "./BaseContact.css";
 
 interface BaseContactProps {
   heading_text: string;
@@ -21,24 +20,6 @@ const BaseContact = (props: BaseContactProps) => {
   const dispatch = useAppDispatch();
   const contact = useAppSelector((state) => state.selectedContact.value);
 
-  // const validateEmail = (email: string) => {
-  //   return email.match(
-  //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  //   );
-  // };
-
-  // const validateName = (name: string) => {
-  //   return name.match(
-  //     /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
-  //   );
-  // };
-
-  // const validateContactNumber = (contactNumber: string) => {
-  //   return contactNumber.match(
-  //     /^[0-9]{15}$/
-  //   );
-  // };
-
   const changeHandler = (prop: string) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       if (props.button_text !== "Edit") {
@@ -50,7 +31,9 @@ const BaseContact = (props: BaseContactProps) => {
   };
 
   const ContactHandler = () => {
-    props.ContactHandler(contact);
+    if (validateContact(contact)) {
+      props.ContactHandler(contact);
+    }
   };
 
   return (

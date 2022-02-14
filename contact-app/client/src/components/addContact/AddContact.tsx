@@ -1,9 +1,8 @@
 import React from "react";
-
 import { BaseContact } from "../baseContact/BaseContact";
 import { setMenu } from "../../redux/menu";
 import { setSelectedContact } from "../../redux/selectedContact";
-import { emptyContact } from "../mainContent/MainContent";
+import { emptyContact } from "../../utils/Utils";
 import { addContact } from "../../redux/contacts";
 import Contact from "../../model/Contact";
 import { useAppDispatch } from "../../redux/hooks";

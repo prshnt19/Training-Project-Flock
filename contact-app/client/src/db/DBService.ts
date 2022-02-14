@@ -5,21 +5,29 @@ import { db } from "./db";
 
 export class DBService {
   static async getContacts(userId: number) {
-    // const contacts = await ContactService.getContacts();
-    // await db.contacts.bulkPut(contacts);
     const contacts = await db.contacts
       .where("userId").equals(userId)
       .toArray();
-    // TODO: Make user specific query
     return contacts;
+  }
+
+  static async putContacts(contacts: Contact[]) {
+    await db.contacts.bulkPut(contacts);
   }
 
   static async addContact(contact: Contact) {
     const id = await ContactService.addContact(contact);
     let newContact = { ...contact };
     newContact.id = id;
-    newContact.userId = await AuthService.checkAuth();
-    // TODO: Make it better
+
+    let userId: number;
+    const val = sessionStorage.getItem("userId");
+    if (val) {
+      userId = parseInt(val);
+    } else {
+      userId = await AuthService.checkAuth();
+    }
+    newContact.userId = userId;
     db.contacts.add(newContact);
     return newContact;
   }

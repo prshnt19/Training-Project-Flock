@@ -1,12 +1,10 @@
 import React from "react";
-
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
 import { setMenu } from "../../redux/menu";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { grey } from "@mui/material/colors";
-
 import "./ShowContact.css";
 
 const ShowContact = () => {
@@ -69,6 +67,5 @@ const ShowContact = () => {
     </Box>
   );
 };
-
 
 export { ShowContact };

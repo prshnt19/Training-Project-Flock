@@ -5,10 +5,10 @@ import { setMenu } from "../../redux/menu";
 import { useAppDispatch } from "../../redux/hooks";
 import { setSearchText } from "../../redux/searchText";
 import AddIcon from "@material-ui/icons/Add";
-
-import "./Sidebar.css";
 import { setSelectedContact } from "../../redux/selectedContact";
-import { emptyContact } from "../mainContent/MainContent";
+import { emptyContact } from "../../utils/Utils";
+import "./Sidebar.css";
+
 const Sidebar = () => {
   const dispatch = useAppDispatch();
 

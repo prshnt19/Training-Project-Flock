@@ -1,4 +1,3 @@
-import "./App.css";
 import React from "react";
 import { LoginPage } from "./components/loginPage/LoginPage";
 import { MainContent } from "./components/mainContent/MainContent";
@@ -8,6 +7,7 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import "./App.css";
 
 function App() {
   return (

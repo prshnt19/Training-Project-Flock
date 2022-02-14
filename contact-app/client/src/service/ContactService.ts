@@ -7,29 +7,29 @@ import {
   POST,
   PUT,
   DELETE,
-} from "../service/constants";
+} from "../utils/APIConstants";
 
 import { APIManager } from "../api/APIManager";
 import Contact from "../model/Contact";
 
 export class ContactService {
 
-  static async getContacts() {
+  static async getContacts(): Promise<Contact[]> {
     return APIManager.request(GET_CONTACTS, GET, null, true);
   }
 
-  static async addContact(contact: Contact) {
+  static async addContact(contact: Contact): Promise<number> {
     const res = await APIManager.request(ADD_CONTACT, POST, JSON.stringify(contact), true, true);
     return res.id;
   }
 
-  static async updateContact(contact: Contact) {
-    return APIManager.request(UPDATE_CONTACT, PUT, JSON.stringify(contact), true, true, false);
+  static async updateContact(contact: Contact): Promise<void> {
+    APIManager.request(UPDATE_CONTACT, PUT, JSON.stringify(contact), true, true, false);
   }
 
-  static async deleteContact(contactId: number) {
+  static async deleteContact(contactId: number): Promise<void> {
     var formData = new FormData();
     formData.append("id", contactId.toString());
-    return APIManager.request(DELETE_CONTACT, DELETE, formData, true, false, false);
+    APIManager.request(DELETE_CONTACT, DELETE, formData, true, false, false);
   }
 }

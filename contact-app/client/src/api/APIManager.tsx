@@ -8,6 +8,7 @@ export class APIManager {
     if (isJSON) {
       headers.append("Content-Type", "application/json");
     }
+
     return await fetch(url, {
       method: method,
       headers: headers,

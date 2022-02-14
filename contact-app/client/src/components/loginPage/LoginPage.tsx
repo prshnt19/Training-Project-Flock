@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
-import "./LoginPage.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AuthService } from "../../service/AuthService";
+import { validateEmail } from "../../utils/Utils";
+import "./LoginPage.css";
 
 const LoginPage = function () {
   let navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("sessionToken")) {
-      AuthService.checkAuth().then((data) => {
-        navigate("/", { replace: true });
+      AuthService.checkAuth().then((userId) => {
+        if (userId) {
+          navigate("/", { replace: true });
+        }
       });
     }
   }, []);
@@ -22,23 +25,16 @@ const LoginPage = function () {
     password: "",
   });
 
-  const validateEmail = (email: string) => {
-    return email.match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-  };
-
   const changeHandler = (prop: string) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       setLoginInfo({ ...loginInfo, [prop]: event.target.value });
     };
   };
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     if (validateEmail(loginInfo.email)) {
-      AuthService
-        .loginUser(loginInfo)
-        .then((res) => {
+      AuthService.loginUser(loginInfo)
+        .then(() => {
           navigate("/", { replace: true });
         })
         .catch((err) => {
@@ -64,14 +60,14 @@ const LoginPage = function () {
             <TextField
               required
               margin="normal"
-              id="outlined-required"
+              id="email"
               label="Email"
               onChange={changeHandler("email")}
             />
             <TextField
               required
               margin="normal"
-              id="outlined-required"
+              id="password"
               label="Password"
               type="password"
               onChange={changeHandler("password")}

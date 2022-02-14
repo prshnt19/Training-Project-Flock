@@ -1,10 +1,10 @@
 import React from "react";
-import "./Navbar.css";
 import { Avatar } from "@mui/material";
 import { ExitToAppRounded } from "@material-ui/icons";
-
 import { AuthService } from "../../service/AuthService";
 import { useNavigate } from "react-router-dom";
+import { stringToColor } from "../../utils/Utils";
+import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   let user_name = window.sessionStorage.getItem("name");
-  if (user_name === "") {
+  if (user_name === null) {
     user_name = "User";
   }
 
@@ -37,7 +37,7 @@ const Navbar = () => {
 
       <div className="navbar-right">
         <div className="navbar-profile">
-          <Avatar src="" style={{ height: "35px", width: "35px" }} />
+          <Avatar src="" style={{ height: "35px", width: "35px", backgroundColor: stringToColor(user_name) }} />
           <p> Hi, { user_name }</p>
         </div>
 
