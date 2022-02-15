@@ -17,27 +17,28 @@ const MainContent = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const fetchContacts = async () => {
+  const getContacts = async () => {
+    const userId = await AuthService.checkAuth();
+    if (userId) {
+      DBService.getContacts(userId).then((contacts) => {
+        dispatch(setContacts(contacts));
+      });
+    } else {
+      localStorage.removeItem("sessionToken");
+      navigate("/login", { replace: true });
+    }
+  }
+
+  const fetchContactsFromServer = async () => {
     console.log("fetching contacts");
     const contacts = await ContactService.getContacts();
     dispatch(setContacts(contacts)); // TODO: Use Delta Sync
   };
 
   useEffect(() => {
-    AuthService.checkAuth()
-      .then((userId) => {
-        if (userId) {
-          DBService.getContacts(userId).then((contacts) => { // TODO: CallBack hell
-            dispatch(setContacts(contacts));
-          });
-        } else {
-          localStorage.removeItem("sessionToken");
-          navigate("/login", { replace: true });
-        }
-      });
-
-    fetchContacts();
-    const interval = setInterval(fetchContacts, 600000);
+    getContacts();
+    fetchContactsFromServer();
+    const interval = setInterval(fetchContactsFromServer, 600000);
 
     return () => {
       console.log("clearing interval");
