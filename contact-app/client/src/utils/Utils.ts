@@ -1,14 +1,6 @@
 import Contact from "../model/Contact";
 
-export const emptyContact: Contact = {
-  id: 0,
-  userId: 0,
-  name: "",
-  contact: "",
-  email: "",
-  address: "",
-  score: 0,
-};
+export const emptyContact = new Contact();
 
 export const validateEmail = (email: string) => {
   return email.match(
@@ -30,15 +22,15 @@ export const validateContactNumber = (contactNumber: string) => {
 
 export const validateContact = (contact: Contact): boolean => {
   if (contact.name !== "" && !validateName(contact.name)) {
-    alert("Invalid Name");
+    // alert("Invalid Name");
     return false;
   }
   if (contact.contact !== "" && !validateContactNumber(contact.contact)) {
-    alert("Invalid Contact Number");
+    // alert("Invalid Contact Number");
     return false;
   }
   if (contact.email !== "" && !validateEmail(contact.email)) {
-    alert("Invalid Email");
+    // alert("Invalid Email");
     return false;
   }
   return (contact.name !== "" || contact.contact !== "" || contact.email !== "" || contact.address !== "");
