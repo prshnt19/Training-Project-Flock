@@ -1,12 +1,13 @@
 import React from "react";
 import { Avatar } from "@mui/material";
 import { ExitToAppRounded } from "@material-ui/icons";
-import { AuthService } from "../../service/AuthService";
 import { useNavigate } from "react-router-dom";
+
+import { AuthService } from "../../service/AuthService";
 import { stringToColor } from "../../utils/Utils";
 import "./style.css";
 
-const Navbar = () => {
+const Navbar: React.FC<{}> = () => {
   const navigate = useNavigate();
 
   const logoutHandler = () => {

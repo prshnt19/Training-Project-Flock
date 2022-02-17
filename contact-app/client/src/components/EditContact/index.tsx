@@ -1,11 +1,12 @@
 import React from "react";
+
 import BaseContact from "../BaseContact";
+import Contact from "../../model/Contact";
 import { setMenu } from "../../redux/menu";
 import { useAppDispatch } from "../../redux/hooks";
 import { updateContact } from "../../redux/contacts";
-import Contact from "../../model/Contact";
 
-const EditContact = () => {
+const EditContact: React.FC<{}> = () => {
   const dispatch = useAppDispatch();
 
   const editContactHandler = (contact: Contact) => {

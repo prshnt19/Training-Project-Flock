@@ -2,12 +2,13 @@ import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
+
 import { setMenu } from "../../redux/menu";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { grey } from "@mui/material/colors";
 import "./style.css";
 
-const ShowContact = () => {
+const ShowContact: React.FC<{}> = () => {
   const dispatch = useAppDispatch();
   const contact = useAppSelector((state) => state.selectedContact.value);
 
@@ -15,6 +16,8 @@ const ShowContact = () => {
     event.preventDefault();
     dispatch(setMenu("EditContact"));
   };
+
+  const { name, contactNumber, email, address } = contact;
 
   return (
     <Box className="contact-wrapper-show" border={1} borderColor={grey[400]}>
@@ -31,28 +34,28 @@ const ShowContact = () => {
             }}
             id="outlined-read-only-input"
             label="Name"
-            value={contact.name}
+            value={name}
           />
           <TextField
             fullWidth
             margin="normal"
             id="outlined-read-only-input"
             label="Contact Number"
-            value={contact.contact}
+            value={contactNumber}
           />
           <TextField
             fullWidth
             margin="normal"
             id="outlined-read-only-input"
             label="Email Id"
-            value={contact.email}
+            value={email}
           />
           <TextField
             fullWidth
             margin="normal"
             id="outlined-read-only-input"
             label="Address"
-            value={contact.address}
+            value={address}
             multiline
             minRows={2}
             maxRows={2}

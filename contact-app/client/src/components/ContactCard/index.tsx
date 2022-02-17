@@ -1,13 +1,14 @@
 import React from "react";
-import { Avatar, IconButton } from "@mui/material";
-import ModeEditRoundedIcon from "@mui/icons-material/ModeEditRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditRoundedIcon from "@mui/icons-material/ModeEditRounded";
+import { Avatar, IconButton } from "@mui/material";
+
+import Contact from "../../model/Contact";
 import { setMenu } from "../../redux/menu";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setSelectedContact } from "../../redux/selectedContact";
 import { emptyContact } from "../../utils/Utils";
 import { updateContact, deleteContact } from "../../redux/contacts";
-import Contact from "../../model/Contact";
 import { stringAvatar } from "../../utils/Utils";
 import "./style.css";
 
@@ -30,6 +31,11 @@ const ContactCard: React.FC<ContactProps> = (props) => {
   };
   // TODO: Better move function to ContactList
 
+  const editContactHandler = async () => {
+    dispatch(setSelectedContact(props.contact));
+    dispatch(setMenu("EditContact"));
+  };
+
   const deleteContactHandler = async () => {
     let confirmDelete = window.confirm(
       "Are you sure you want to delete this contact?"
@@ -41,23 +47,22 @@ const ContactCard: React.FC<ContactProps> = (props) => {
     }
   };
 
+  const { name, contactNumber } = props.contact;
+
   return (
     <div className="contact-box">
       <div className="contact-avatar" onClick={showContactHandler}>
         <Avatar {...stringAvatar(props.contact.name)} />
       </div>
       <div className="contact-text" onClick={showContactHandler}>
-        <div className="contact-name">{props.contact.name}</div>
-        <div className="contact-number">{props.contact.contact}</div>
+        <div className="contact-name">{name}</div>
+        <div className="contact-number">{contactNumber}</div>
       </div>
       <div className="contact-edit">
         <IconButton
           title="Edit Contact"
           style={{ height: "40px", width: "40px", borderRadius: "100%", color: "orange" }}
-          onClick={() => {
-            dispatch(setSelectedContact(props.contact));
-            dispatch(setMenu("EditContact"));
-          }}
+          onClick={editContactHandler}
         >
           <ModeEditRoundedIcon />
         </IconButton>

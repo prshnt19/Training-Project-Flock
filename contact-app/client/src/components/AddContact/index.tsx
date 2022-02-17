@@ -1,14 +1,15 @@
 import React from "react";
+
 import BaseContact from "../BaseContact";
+import Contact from "../../model/Contact";
+import { addContact } from "../../redux/contacts";
 import { setMenu } from "../../redux/menu";
 import { setSelectedContact } from "../../redux/selectedContact";
 import { emptyContact } from "../../utils/Utils";
-import { addContact } from "../../redux/contacts";
-import Contact from "../../model/Contact";
 import { useAppDispatch } from "../../redux/hooks";
 import { DBService } from "../../db/DBService";
 
-const AddContact = () => {
+const AddContact: React.FC<{}> = () => {
   const dispatch = useAppDispatch();
 
   const addContactHandler = async (contact: Contact) => {

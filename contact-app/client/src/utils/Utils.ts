@@ -22,18 +22,15 @@ export const validateContactNumber = (contactNumber: string) => {
 
 export const validateContact = (contact: Contact): boolean => {
   if (contact.name !== "" && !validateName(contact.name)) {
-    // alert("Invalid Name");
     return false;
   }
-  if (contact.contact !== "" && !validateContactNumber(contact.contact)) {
-    // alert("Invalid Contact Number");
+  if (contact.contactNumber !== "" && !validateContactNumber(contact.contactNumber)) {
     return false;
   }
   if (contact.email !== "" && !validateEmail(contact.email)) {
-    // alert("Invalid Email");
     return false;
   }
-  return (contact.name !== "" || contact.contact !== "" || contact.email !== "" || contact.address !== "");
+  return (contact.name !== "" || contact.contactNumber !== "" || contact.email !== "" || contact.address !== "");
 }
 
 export const stringToColor = (str: string) => {

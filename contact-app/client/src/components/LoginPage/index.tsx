@@ -3,11 +3,12 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
 import { AuthService } from "../../service/AuthService";
 import { validateEmail } from "../../utils/Utils";
 import "./style.css";
 
-const LoginPage = function () {
+const LoginPage: React.FC<{}> = function () {
   let navigate = useNavigate();
 
   useEffect(() => {

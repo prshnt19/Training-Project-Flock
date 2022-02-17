@@ -2,10 +2,11 @@ import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { setSelectedContact } from "../../redux/selectedContact";
 import { grey } from "@mui/material/colors";
+
 import Contact from "../../model/Contact";
+import { setSelectedContact } from "../../redux/selectedContact";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { validateContact } from "../../utils/Utils";
 import "./style.css";
 
@@ -16,7 +17,7 @@ interface BaseContactProps {
   ContactHandler: (contact: Contact) => void;
 }
 
-const BaseContact = (props: BaseContactProps) => {
+const BaseContact: React.FC<BaseContactProps> = (props) => {
   const dispatch = useAppDispatch();
   const contact = useAppSelector((state) => state.selectedContact.value);
 
@@ -36,6 +37,8 @@ const BaseContact = (props: BaseContactProps) => {
     }
   };
 
+  const {name, contactNumber, email, address} = contact;
+
   return (
     <Box className={props.rootStyle} border={1} borderColor={grey[400]}>
       <Typography variant="h4" color="#575757">
@@ -48,7 +51,7 @@ const BaseContact = (props: BaseContactProps) => {
             margin="normal"
             id="outlined-required"
             label="Name"
-            value={contact.name}
+            value={name}
             onChange={changeHandler("name")}
           />
           <TextField
@@ -56,7 +59,7 @@ const BaseContact = (props: BaseContactProps) => {
             margin="normal"
             id="outlined-required"
             label="Contact Number"
-            value={contact.contact}
+            value={contactNumber}
             onChange={changeHandler("contact")}
           />
           <TextField
@@ -64,7 +67,7 @@ const BaseContact = (props: BaseContactProps) => {
             margin="normal"
             id="outlined-required"
             label="Email Id"
-            value={contact.email}
+            value={email}
             onChange={changeHandler("email")}
           />
           <TextField
@@ -72,7 +75,7 @@ const BaseContact = (props: BaseContactProps) => {
             margin="normal"
             id="outlined-multiline-flexible"
             label="Address"
-            value={contact.address}
+            value={address}
             multiline
             minRows={2}
             maxRows={3}

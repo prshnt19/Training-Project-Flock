@@ -1,10 +1,11 @@
 import React from "react";
+
 import ContactCard from "../ContactCard";
 import { useAppSelector } from "../../redux/hooks";
 import { contactsToDisplay } from "../../utils/Utils";
 import "./style.css";
 
-const ContactList = () => {
+const ContactList: React.FC<{}> = () => {
   const allContacts = useAppSelector((state) => state.contacts.value);
   let searchText = useAppSelector((state) => state.searchText.value);
   let contacts = contactsToDisplay(allContacts, searchText);

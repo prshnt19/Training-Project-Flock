@@ -1,16 +1,22 @@
 import React from "react";
+import AddIcon from "@material-ui/icons/Add";
 import { IconButton } from "@mui/material";
+
 import ContactList from "../ContactList";
 import { setMenu } from "../../redux/menu";
 import { useAppDispatch } from "../../redux/hooks";
 import { setSearchText } from "../../redux/searchText";
-import AddIcon from "@material-ui/icons/Add";
 import { setSelectedContact } from "../../redux/selectedContact";
 import { emptyContact } from "../../utils/Utils";
 import "./style.css";
 
-const Sidebar = () => {
+const Sidebar: React.FC<{}> = () => {
   const dispatch = useAppDispatch();
+
+  const addContactHandler = async () => {
+    dispatch(setSelectedContact(emptyContact));
+    dispatch(setMenu("AddContact"));
+  };
 
   return (
     <div className="sidebar">
@@ -28,10 +34,7 @@ const Sidebar = () => {
             style={{ height: "35px", width: "35px", borderRadius: "100%" }}
             aria-label="add"
             title="Add Contact"
-            onClick={() => {
-              dispatch(setSelectedContact(emptyContact));
-              dispatch(setMenu("AddContact"));
-            }}
+            onClick={addContactHandler}
           >
             <AddIcon style={{ height: "25px", width: "25px" }} />
           </IconButton>
