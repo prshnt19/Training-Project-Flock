@@ -12,7 +12,7 @@ import {
 import { APIManager } from "../api/APIManager";
 import Contact from "../model/Contact";
 
-export class ContactService {
+export default class ContactService {
 
   static async getContacts(): Promise<Contact[]> {
     return APIManager.request(GET_CONTACTS, GET, null, true);

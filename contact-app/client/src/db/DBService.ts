@@ -1,6 +1,5 @@
 import Contact from "../model/Contact";
-import { AuthService } from "../service/AuthService";
-import { ContactService } from "../service/ContactService";
+import { AuthService, ContactService } from "../service";
 import { db } from "./db";
 
 export class DBService {

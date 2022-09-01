@@ -6,10 +6,9 @@ import ShowContact from "../ShowContact";
 import EditContact from "../EditContact";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
+import { AuthService, ContactService } from "../../service";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { setContacts } from "../../redux/contacts";
-import { ContactService } from "../../service/ContactService";
-import { AuthService } from "../../service/AuthService";
 import { DBService } from "../../db/DBService";
 import "./style.css";
 

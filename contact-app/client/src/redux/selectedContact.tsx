@@ -10,7 +10,7 @@ const initialState: SelecctedContactState = {
     id: 0,
     userId: 0,
     name: "",
-    contact: "",
+    contactNumber: "",
     email: "",
     address: "",
     score: 0,

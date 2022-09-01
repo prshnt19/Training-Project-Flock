@@ -3,7 +3,7 @@ import { Avatar } from "@mui/material";
 import { ExitToAppRounded } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
 
-import { AuthService } from "../../service/AuthService";
+import { AuthService } from "../../service";
 import { stringToColor } from "../../utils/Utils";
 import "./style.css";
 

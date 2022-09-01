@@ -49,14 +49,14 @@ test('validateContact_Invalid_Name', () => {
 test('validateContact_Invalid_Number', () => {
   let contact = new Contact();
   contact.name = "example";
-  contact.contact = "abc";
+  contact.contactNumber = "abc";
   expect(validateContact(contact)).toBe(false);
 });
 
 test('validateContact_Invalid_Email', () => {
   let contact = new Contact();
   contact.name = "example";
-  contact.contact = "0123456789";
+  contact.contactNumber = "0123456789";
   contact.email = "abc";
   expect(validateContact(contact)).toBe(false);
 });
@@ -64,7 +64,7 @@ test('validateContact_Invalid_Email', () => {
 test('validateContact_Valid', () => {
   let contact = new Contact();
   contact.name = "example";
-  contact.contact = "0123456789";
+  contact.contactNumber = "0123456789";
   contact.email = "abc@example.com";
   expect(validateContact(contact)).toBe(true);
 });

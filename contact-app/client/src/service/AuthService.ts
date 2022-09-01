@@ -10,7 +10,7 @@ import {
 import { APIManager } from "../api/APIManager";
 import User from "../model/User";
 
-export class AuthService {
+export default class AuthService {
 
   static async checkAuth(): Promise<number> {
     const res = await APIManager.request(CHECK_AUTH, GET, null, true, true);
